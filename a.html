@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./leaflet/leaflet.css" />
+    <script src="./leaflet/leaflet.js"></script>
+</head>
+
+<body>
+    <div id="map" style="width: 600px; height: 400px;"></div>
+    <script>
+        var map = L.map('map').setView([10.7829, 106.7010], 13);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        var marker = L.marker([10.785956641872795, 106.77400018360896]).addTo(map);
+
+        var circle = L.circle([10.791022823652353, 106.70016647580326], {
+            color: 'red',
+            fillColor: '#ff000080',
+            fillOpacity: 0.5,
+            radius: 500
+        }).addTo(map);
+        // var polygon = L.polygon([
+        //     [10.791022164957763, 106.70016446414655],
+        //     [10.785956641872795, 106.77400018360896],
+        //     [10.8478, 106.7650]
+        // ]).addTo(map);
+        // marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+        // var popup = L.popup()
+        //     .setLatLng([10.8478, 106.7650])
+        //     .setContent("HCMC")
+        //     .openOn(map);
+        // function onMapClick(e) {
+        //     alert("You clicked the map at " + e.latlng);
+        // }
+        // map.on('click', onMapClick);
+        var popup = L.popup();
+
+        function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent("You clicked the map at " + e.latlng.toString())
+                .openOn(map);
+        }
+
+        map.on('click', onMapClick);
+
+    </script>
+
+</body>
+
+</html>
